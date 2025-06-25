@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="./lib/bootstrap-5.3.7-dist/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="bg-dark">
 
-    <calculadora-basica></calculadora-basica>
+    <calculadora-basica id="miCalculadora"></calculadora-basica>
+    <script>
+        document.getElementById('miCalculadora').addEventListener('resultado-obtenido', function (event) {
+            console.log(event.detail);
+        });
+    </script>
     <script src="./js/calculadora.js"></script>
     <script src="./lib/bootstrap-5.3.7-dist/js/bootstrap.min.js"></script>
 </body>
