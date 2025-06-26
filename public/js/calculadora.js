@@ -4,17 +4,17 @@ class CalculadoraBasica extends HTMLElement {
 
         const shadowCalculadora = this.attachShadow({ mode: 'open' });
         shadowCalculadora.innerHTML = `
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> /*Se cargar los estilos de bootstrap para que actue con el Shadow DOM*/
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!--Se cargar los estilos de bootstrap para que actue con el Shadow DOM-->
         
-        /*Contenedor general*/
-        <div class="d-flex justify-content-center align-items-center vh-100">
+        <!--Contenedor general-->
+        <div class="d-flex flex-column justify-content-center align-items-center vh-100">
             
-            /*Contenedor de la calculadora*/
+            <!--Contenedor de la calculadora-->
             <div class="container bg-white p-4 rounded shadow w-50">
                 <h1 class="text-center">Mi Calculadora Básica</h1>
                 <hr class="border border-primary border-3 opacity-75">
 
-                /*Inputs para los números y el selector de operaciones*/
+                <!--Inputs para los números y el selector de operaciones-->
                 <div class="mb-3">
                     <input type="number" id="num1" class="form-control" placeholder="Ingrese el primer número">
                 </div>
@@ -31,21 +31,21 @@ class CalculadoraBasica extends HTMLElement {
                     </select>
                 </div>
 
-                /*Botón para calcular y mostrar el resultado*/
+                <!--Botón para calcular y mostrar el resultado-->
                 <button id="calcular" class="btn btn-success w-100">Calcular</button>
                 <div class="mt-3 text-center">
                     <span id="resultado" class="badge bg-primary fs-4 w-25 py-4">0</span>
                 </div>
-
-                /*PARTE OPCIONAL EXTRA DONDE MOSTRARA EL HISTORIAL DE OPERACIONES*/
-                <div>
-                    <h2>Historial de operaciones: </h2>
-                    <ul id='historial-operaciones'>
-                        /*En esta parte se mostrará el historial de operaciones realizadas*/
-                    </ul>
-                </div>
             </div>
-            
+            <!--PARTE OPCIONAL EXTRA DONDE MOSTRARA EL HISTORIAL DE OPERACIONES-->
+            <!-- Contenedor del historial -->
+            <div class="container bg-light p-4 rounded shadow w-50 mt-4">
+                <h2 class="text-center">Historial de operaciones</h2>
+                <hr class="border border-primary border-3 opacity-75">
+                <ul id="historial-operaciones">
+                    <!-- Aquí se mostrarán las operaciones realizadas -->
+                </ul>
+            </div>
         </div>
         `;
     }
