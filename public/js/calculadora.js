@@ -41,6 +41,7 @@ class CalculadoraBasica extends HTMLElement {
                 <div>
                     <h2>Historial de operaciones: </h2>
                     <ul id='historial-operaciones'>
+                        /*En esta parte se mostrará el historial de operaciones realizadas*/
                     </ul>
                 </div>
             </div>
@@ -49,6 +50,8 @@ class CalculadoraBasica extends HTMLElement {
         `;
     }
 
+
+    /*El método connectedCallback se ejecuta cuando el elemento se conecta al DOM*/
     connectedCallback() {
         const btn = this.shadowRoot.querySelector('#calcular');
         const primerNumero = this.shadowRoot.querySelector('#num1');
@@ -69,10 +72,10 @@ class CalculadoraBasica extends HTMLElement {
             /*Si los valores no son números, se muestra un mensaje de alerta*/
             if (isNaN(num1) || isNaN(num2)) {
                 alert('Por favor, ingrese números válidos.')
-                return
+                return /*Se agrego return para evitar que se ejecute el resto del código por ende se guarde en el historial*/
             } else if (operacion === 'predeterminado') { /*Si el valor del selector es predeterminado, se muestra un mensaje de alerta*/
                 alert('Seleccionar una operación!!')
-                return
+                return /*Se agrego return para evitar que se ejecute el resto del código por ende se guarde en el historial*/
             } else if (operacion === 'suma') { /*Si el valor del selector es suma, se realiza la suma*/
                 resultadoOperacion = num1 + num2;
             }
@@ -87,14 +90,18 @@ class CalculadoraBasica extends HTMLElement {
                 /*Este condicional valida que no exista una división por cero*/
                 if (num2 === 0) {
                     alert('No se puede dividir por cero.')/*Si la división es por cero, se muestra un mensaje de alerta*/
-                    return
+                    return /*Se agrego return para evitar que se ejecute el resto del código por ende se guarde en el historial*/
                 } else {
                     resultadoOperacion = num1 / num2; /*Caso contrario, se realiza la división*/
                 }
             }
-            resultado.textContent = resultadoOperacion;
+            resultado.textContent = resultadoOperacion; /*Se muestra el resultado de la operación en el elemento con id resultado*/
 
-            const historial = document.createElement('li');
+            /*A PARTIR DE AQUI SE REALIZA LA PARTE OPCIONAL DE LA TAREA QUE NOS PIDE EMITIR UN EVENTO PERSONALIZADO QUE INFORME EL RESULTADO AL DOCUMENTO PADRE Y MUESTRE UN HISTORIAL DE OPERACIONES*/
+
+            const historial = document.createElement('li'); /*Crea un elemento li con el historial de operaciones*/
+
+            /*Este condicional nos permite comparar el selector elegido y por lo tanto mostrar el signo de la operacion en el historial*/
             if (operacion === 'suma') {
                 historial.textContent = num1 + ' + ' + num2 + ' = ' + resultadoOperacion
             } else if (operacion === 'resta') {
@@ -105,8 +112,9 @@ class CalculadoraBasica extends HTMLElement {
                 historial.textContent = num1 + ' / ' + num2 + ' = ' + resultadoOperacion
             }
 
-            historialOperaciones.appendChild(historial);
+            historialOperaciones.appendChild(historial); /*Agrega el elemento li al historial de operaciones*/
 
+            /*Evento personalizado que informa el resultado al documento padre*/
             this.dispatchEvent(new CustomEvent('resultado-obtenido', {
                 detail: {
                     resultado: resultadoOperacion
@@ -118,4 +126,5 @@ class CalculadoraBasica extends HTMLElement {
     }
 }
 
+/*Define el componente personalizado <calculadora-basica>*/
 customElements.define('calculadora-basica', CalculadoraBasica);
