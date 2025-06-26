@@ -10,7 +10,12 @@
 
 <body class="bg-dark">
 
+    <!--Componente personalizado con el nombre solicitado <calculadora-basica>-->
     <calculadora-basica id="miCalculadora"></calculadora-basica>
+
+
+    <!--PARTE OPCIONAL EXTRA-->
+    <!--Evento personalizado que informa el resultado al documento padre-->
     <script>
         document.getElementById('miCalculadora').addEventListener('resultado-obtenido', function (event) {
             console.log(event.detail);
